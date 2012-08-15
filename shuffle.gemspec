@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = "shuffle"
-  spec.version     = "0.1.0"
+  spec.version     = "0.1.1"
   spec.summary     = "n-mer shuffling."
   spec.description = "Simple method to shuffle list while preserving n-mer frequency."
   spec.authors     = ["Evan Senter"]

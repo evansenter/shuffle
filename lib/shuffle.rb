@@ -20,22 +20,32 @@ class Shuffle
   end
   
   def shuffle(size)
-    shuffled_sequence = if size == 1
+    shuffled_sequence = shuffler(size)
+    
+    rejoin ? shuffled_sequence.join : shuffled_sequence
+  end
+  
+  def valid?(other_sequence, size)
+    split_other_sequence = other_sequence.is_a?(String) && sequence !~ /\s/ ? other_sequence.split(//) : other_sequence
+    
+    frequency(sequence.each_cons(size)) == frequency(split_other_sequence.each_cons(size))
+  end
+  
+  def validate_random(size)
+    valid?(shuffler(size), size)
+  end
+  
+  private
+  
+  def shuffler(size)
+    if size == 1
       sequence.shuffle
     else
       edge_hash = shuffle!(edge_list(size))
       shuffle!(edge_hash) until connected?(last_edge_graph(edge_hash, size), size)
       construct_from(edge_hash, size)
     end
-    
-    rejoin ? shuffled_sequence.join : shuffled_sequence
   end
-  
-  def validate(size)
-    frequency(sequence.each_cons(size)) == frequency(shuffle(size).each_cons(size))
-  end
-  
-  private
   
   def start(size)
     sequence[0, size - 1]
