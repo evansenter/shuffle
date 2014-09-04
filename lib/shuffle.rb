@@ -20,7 +20,7 @@ class Shuffle
   end
   
   def shuffle(size)
-    shuffled_sequence = shuffler(size)
+    shuffled_sequence = sequence.length > 1 ? shuffler(size) : sequence
     
     rejoin ? shuffled_sequence.join : shuffled_sequence
   end
